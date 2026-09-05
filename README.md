@@ -1,130 +1,46 @@
-For developers:
-pnpm dlx wrangler login
-________
+# Student Community Platform API
 
+API backend para la plataforma de la comunidad estudiantil, construida sobre Cloudflare Workers utilizando TypeScript, el estándar OpenAPI (con Chanfana) y Hono.
 
-Packet: pnpm
+## Requisitos Previos
 
-_____________________
-  student-community-platform-api   main   pnpm create cloudflare@latest student-community-platform-api
-.../1a06f2e58d6-1924                     |   +1 +
-.../1a06f2e58d6-1924                     | Progress: resolved 1, reused 0, downloaded 1, added 1, done
-(node:9068) Warning: `--localstorage-file` was provided without a valid path
-(Use `node --trace-warnings ...` to show where the warning was created)
+- Node.js instalado (versión LTS recomendada).
+- Gestor de paquetes `pnpm`.
 
-──────────────────────────────────────────────────────────────────────────────────────────────────────────
-👋 Welcome to create-cloudflare v2.72.5!
-🧡 Let's get started.
-📊 Cloudflare collects telemetry about your usage of Create-Cloudflare.
+## Instalación y Configuración Base
 
-Learn more at: https://github.com/cloudflare/workers-sdk/blob/main/packages/create-cloudflare/telemetry.md
-──────────────────────────────────────────────────────────────────────────────────────────────────────────
+1. Iniciar sesión en Cloudflare desde la terminal:
 
-╭ Create an application with Cloudflare Step 1 of 3
-│
-├ In which directory do you want to create your application?
-│ dir ./student-community-platform-api
-│
-├ What would you like to start with?
-│ category Hello World example
-│
-├ Which template would you like to use?
-│ type API starter (OpenAPI compliant)
-│
-├ Copying template files
-│ files copied to project directory
-│
-├ Installing dependencies
-│ installed via `pnpm install`
-│
-├ Do you want to add an AGENTS.md file to help AI coding tools understand Cloudflare APIs?
-│ yes agents
-│
-╰ Application created
+   ```bash
+   pnpm dlx wrangler login
+   ```
 
-╭ Configuring your application for Cloudflare Step 2 of 3
-│
-├ Installing wrangler A command line tool for building Cloudflare Workers
-│ installed via `pnpm install wrangler --save-dev`
-│
-├ Selecting workerd compatibility date
-│ compatibility date 2026-09-03
-│
-├ Generating types for your application
-│ generated to `./worker-configuration.d.ts` via `pnpm run cf-typegen`
-│
-├ Installing @types/node
-│ installed via pnpm
-│
-├ You're in an existing git repository. Do you want to use git for version control?
-│ yes git
-│
-╰ Application configured
+2. Instalar las dependencias del proyecto (incluyendo las definiciones de tipos para TypeScript):
 
-╭ Deploy with Cloudflare Step 3 of 3
-│
-├ Do you want to deploy your application?
-│ no deploy via `pnpm run deploy`
-│
-╰ Done
+   ```bash
+   pnpm install
+   ```
 
-────────────────────────────────────────────────────────────
-🎉  SUCCESS  Application created successfully!
+## Estructura del Proyecto
 
-💻 Continue Developing
-Change directories: cd student-community-platform-api
-Deploy: pnpm run deploy
+- `src/index.ts`: Punto de entrada principal y enrutador de la API.
+- `src/endpoints/`: Archivos individuales para cada endpoint de la API.
+- `wrangler.jsonc`: Archivo de configuración para Cloudflare Workers.
 
-📖 Explore Documentation
-https://developers.cloudflare.com/workers
+## Desarrollo Local
 
-🐛 Report an Issue
-https://github.com/cloudflare/workers-sdk/issues/new/choose
+1. Iniciar el servidor de desarrollo local:
 
-💬 Join our Community
-https://discord.cloudflare.com
-────────────────────────────────────
-```
-student-community-platform-api
-├─ readme.md
-└─ student-community-platform-api
-   ├─ AGENTS.md
-   ├─ package.json
-   ├─ pnpm-lock.yaml
-   ├─ pnpm-workspace.yaml
-   ├─ README.md
-   ├─ src
-   │  ├─ ...
-   │  ├─ index.ts
-   │  └─ types.ts
-   ├─ tsconfig.json
-   ├─ worker-configuration.d.ts
-   └─ wrangler.jsonc
+   ```bash
+   pnpm run dev
+   ```
 
-```
-______________
-# Cloudflare Workers OpenAPI 3.1
+2. Abrir [`http://localhost:8787/`](http://localhost:8787/) en el navegador para ver la interfaz de Swagger y probar los endpoints.
 
-This is a Cloudflare Worker with OpenAPI 3.1 using [chanfana](https://github.com/cloudflare/chanfana) and [Hono](https://github.com/honojs/hono).
+## Flujo de Trabajo (Git Flow)
 
-This is an example project made to be used as a quick start into building OpenAPI compliant Workers that generates the
-`openapi.json` schema automatically from code and validates the incoming request to the defined parameters or request body.
+Este proyecto implementa Git Flow para el control de versiones:
 
-## Get started
-
-1. Sign up for [Cloudflare Workers](https://workers.dev). The free tier is more than enough for most use cases.
-2. Clone this project and install dependencies with `npm install`
-3. Run `wrangler login` to login to your Cloudflare account in wrangler
-4. Run `wrangler deploy` to publish the API to Cloudflare Workers
-
-## Project structure
-
-1. Your main router is defined in `src/index.ts`.
-2. Each endpoint has its own file in `src/endpoints/`.
-3. For more information read the [chanfana documentation](https://chanfana.pages.dev/) and [Hono documentation](https://hono.dev/docs).
-
-## Development
-
-1. Run `wrangler dev` to start a local instance of the API.
-2. Open `http://localhost:8787/` in your browser to see the Swagger interface where you can try the endpoints.
-3. Changes made in the `src/` folder will automatically trigger the server to reload, you only need to refresh the Swagger interface.
+- La rama `main` contiene el estado base y de producción.
+- La rama `develop` se utiliza para integrar el progreso general de desarrollo.
+- Cada nueva funcionalidad o implementación debe desarrollarse en su propia rama de tipo `feature` (creada a partir de `develop`) y posteriormente integrarse mediante un Pull Request.
